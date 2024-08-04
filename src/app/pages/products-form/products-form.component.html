@@ -1,0 +1,81 @@
+<!-- Content Header (Page header) -->
+<section class="content-header">
+    <div class="container-fluid">
+        <div class="row mb-2">
+            <div class="col-sm-6">
+                <h1>Products Page</h1>
+            </div>
+            <div class="col-sm-6">
+                <ol class="breadcrumb float-sm-right">
+                    <li class="breadcrumb-item"><a href="#">Home</a></li>
+                    <li class="breadcrumb-item">
+                        <a href="#">Products Page</a>
+                    </li>
+                    <li class="breadcrumb-item active">Edit Products</li>
+                </ol>
+            </div>
+        </div>
+    </div>
+    <!-- /.container-fluid -->
+</section>
+
+<!-- Main content -->
+<section class="content">
+    <!-- Default box -->
+    <div class="container-fluid">
+        <div class="card">
+            <form
+                [formGroup]="productsForm"
+                (ngSubmit)="onSubmit()"
+                class="order-form"
+            >
+                <div class="d-none">
+                    <mat-form-field appearance="fill">
+                        <mat-label>ID</mat-label>
+                        <input
+                            [disabled]="isDisable"
+                            matInput
+                            id="id"
+                            formControlName="id"
+                            type="text"
+                        />
+                    </mat-form-field>
+                </div>
+                <div>
+                    <mat-form-field appearance="fill">
+                        <mat-label>Title</mat-label>
+                        <input
+                            [disabled]="isDisable"
+                            matInput
+                            id="title"
+                            formControlName="title"
+                            type="text"
+                        />
+                    </mat-form-field>
+                </div>
+
+                <div>
+                    <mat-form-field appearance="fill">
+                        <mat-label>Price</mat-label>
+                        <input
+                            matInput
+                            id="price"
+                            formControlName="price"
+                            type="text"
+                        />
+                    </mat-form-field>
+                </div>
+
+                <button mat-raised-button color="primary" type="submit">
+                    Submit
+                </button>
+            </form>
+
+            <!-- /.card-body -->
+            <div class="card-footer"></div>
+            <!-- /.card-footer-->
+        </div>
+    </div>
+    <!-- /.card -->
+</section>
+<!-- /.content -->

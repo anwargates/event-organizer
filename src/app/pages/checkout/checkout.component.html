@@ -1,0 +1,49 @@
+<!-- src/app/components/checkout/checkout.component.html -->
+<div class="checkout">
+    <div class="container">
+        <div *ngIf="product">
+            <h2>Checkout</h2>
+            <img class="header-image" [src]="product.imageUrl" alt="" />
+            <h3>{{ product.title }}</h3>
+            <p>Category: {{ product.category }}</p>
+            <p>Price: {{ product.price }}</p>
+            <ul>
+                <li>Max Guests: {{ product.details.maxGuests }}</li>
+                <li>Duration: {{ product.details.duration }}</li>
+                <li>Location: {{ product.details.location }}</li>
+                <li>Amenities: {{ product.details.amenities.join(', ') }}</li>
+            </ul>
+            <form [formGroup]="checkoutForm" (ngSubmit)="proceedToPayment()">
+                <mat-form-field appearance="fill">
+                    <mat-label>Event Date Range</mat-label>
+                    <mat-date-range-input
+                        [formGroup]="checkoutForm"
+                        [rangePicker]="eventDateRangePicker"
+                    >
+                        <input
+                            matStartDate
+                            formControlName="tanggalEventMulai"
+                            placeholder="Start date"
+                        />
+                        <input
+                            matEndDate
+                            formControlName="tanggalEventAkhir"
+                            placeholder="End date"
+                        />
+                    </mat-date-range-input>
+                    <mat-hint>DD/MM/YY – DD/MM/YY</mat-hint>
+                    <mat-datepicker-toggle
+                        matIconSuffix
+                        [for]="eventDateRangePicker"
+                    ></mat-datepicker-toggle>
+                    <mat-date-range-picker
+                        #eventDateRangePicker
+                    ></mat-date-range-picker>
+                </mat-form-field>
+                <button type="submit" [disabled]="checkoutForm.invalid">
+                    Proceed to Payment
+                </button>
+            </form>
+        </div>
+    </div>
+</div>

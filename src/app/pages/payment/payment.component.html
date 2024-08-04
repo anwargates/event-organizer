@@ -1,0 +1,20 @@
+<!-- src/app/components/payment/payment.component.html -->
+<div class="payment">
+    <div class="container">
+        <h2>Payment</h2>
+        <div *ngIf="order">
+            <img [src]="qrCodeUrl" alt="QR Code" />
+            <p>Account Number: {{ accountNumber }}</p>
+            <form [formGroup]="paymentForm" (ngSubmit)="uploadProof($event)">
+                <input
+                    type="file"
+                    formControlName="proofOfPayment"
+                    (change)="uploadProof($event)"
+                />
+                <button type="submit" [disabled]="paymentForm.invalid">
+                    Submit Proof of Payment
+                </button>
+            </form>
+        </div>
+    </div>
+</div>

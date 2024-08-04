@@ -1,0 +1,23 @@
+.schedule {
+    @media (max-width: 1024px) {
+        display: none;
+    }
+}
+
+p {
+    font-size: 14px;
+    line-height: 28px;
+    color: #4a4a4a;
+}
+
+h1,
+h2,
+h3,
+h4,
+h5,
+h6 {
+    color: #1e1e1e;
+    margin-top: 0px;
+    margin-bottom: 0px;
+    font-weight: 700;
+}

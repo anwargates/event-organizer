@@ -1,0 +1,10 @@
+.order-form {
+    display: flex;
+    flex-direction: column;
+    gap: 16px;
+    padding: 18px;
+}
+
+mat-form-field {
+    width: 100%;
+}

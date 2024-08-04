@@ -1,0 +1,91 @@
+<!-- wedding-package.component.html -->
+<mat-table [dataSource]="products" matSort matPaginator>
+    <ng-container matColumnDef="title">
+        <mat-header-cell *matHeaderCellDef mat-sort-header
+            >Title</mat-header-cell
+        >
+        <mat-cell *matCellDef="let package">{{ package.title }}</mat-cell>
+    </ng-container>
+
+    <ng-container matColumnDef="location">
+        <mat-header-cell *matHeaderCellDef mat-sort-header
+            >Location</mat-header-cell
+        >
+        <mat-cell *matCellDef="let package">{{
+            package.details.location
+        }}</mat-cell>
+    </ng-container>
+
+    <ng-container matColumnDef="duration">
+        <mat-header-cell *matHeaderCellDef mat-sort-header
+            >Duration (hours)</mat-header-cell
+        >
+        <mat-cell *matCellDef="let package">{{
+            package.details.duration
+        }}</mat-cell>
+    </ng-container>
+
+    <ng-container matColumnDef="maxGuests">
+        <mat-header-cell *matHeaderCellDef mat-sort-header
+            >Max Guests</mat-header-cell
+        >
+        <mat-cell *matCellDef="let package">{{
+            package.details.maxGuests
+        }}</mat-cell>
+    </ng-container>
+
+    <ng-container matColumnDef="amenities">
+        <mat-header-cell *matHeaderCellDef>Amenities</mat-header-cell>
+        <mat-cell *matCellDef="let package">
+            <ul>
+                <li *ngFor="let amenity of package.details.amenities">
+                    {{ amenity }}
+                </li>
+            </ul>
+        </mat-cell>
+    </ng-container>
+
+    <ng-container matColumnDef="price">
+        <mat-header-cell *matHeaderCellDef mat-sort-header
+            >Price</mat-header-cell
+        >
+        <mat-cell *matCellDef="let package">{{
+            package.price | currency: 'IDR' 
+        }}</mat-cell>
+    </ng-container>
+
+    <ng-container matColumnDef="orderProof">
+        <mat-header-cell *matHeaderCellDef>Order Proof</mat-header-cell>
+        <mat-cell *matCellDef="let package">
+            <button mat-button (click)="openDialog(package.imageUrl)">
+                View
+            </button>
+        </mat-cell>
+    </ng-container>
+
+    <ng-container matColumnDef="actions">
+        <mat-header-cell *matHeaderCellDef>Actions</mat-header-cell>
+        <mat-cell *matCellDef="let package">
+            <button
+                mat-icon-button
+                color="warn"
+                (click)="deleteOrder(package.id)"
+            >
+                <mat-icon>delete</mat-icon>
+            </button>
+            <button
+                mat-icon-button
+                color="primary"
+                [routerLink]="['/dashboard/products/edit', package.id]"
+            >
+                <mat-icon>edit</mat-icon>
+            </button>
+        </mat-cell>
+    </ng-container>
+
+    <mat-header-row *matHeaderRowDef="displayedColumns"></mat-header-row>
+    <mat-row *matRowDef="let row; columns: displayedColumns"></mat-row>
+</mat-table>
+<!-- <button mat-raised-button color="primary" [routerLink]="['/dashboard/add']">
+    Add Package
+</button> -->
