@@ -3,10 +3,7 @@ import { Router } from '@angular/router';
 import { ToastrService } from 'ngx-toastr';
 import { sleep } from '@/utils/helpers';
 
-// import { createUserWithEmailAndPassword } from '@firebase/auth';
-// import { User, onAuthStateChanged, signInWithEmailAndPassword, signInWithPopup, updateProfile } from 'firebase/auth';
-// import { GoogleAuthProvider } from 'firebase/auth';
-// import { firebaseAuth } from '@/firebase';
+
 import { addDoc, collection, doc, docData, Firestore, getDoc, setDoc } from '@angular/fire/firestore';
 import { createUserWithEmailAndPassword, getAuth, GoogleAuthProvider, onAuthStateChanged, signInWithEmailAndPassword, signInWithPopup, updateProfile, User } from '@angular/fire/auth';
 
