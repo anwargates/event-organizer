@@ -17,7 +17,7 @@ interface Status {
 export class OrderFormComponent {
     statusList: Status[] = [
         {value: 'DONE', viewValue: 'DONE'},
-        {value: 'PENDING', viewValue: 'PENDING'}
+        {value: 'BELUM BAYAR', viewValue: 'BELUM BAYAR'}
     ];
 
     orderForm!: FormGroup;

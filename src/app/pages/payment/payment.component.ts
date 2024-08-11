@@ -9,16 +9,17 @@ import {
     getDownloadURL
 } from '@angular/fire/storage';
 import {OrdersService} from '@services/orders.service';
-import {error} from 'console';
+import {ToastrService} from 'ngx-toastr';
 
 @Component({
     selector: 'app-payment',
     templateUrl: './payment.component.html',
-    styleUrl: './payment.component.scss'
+    styleUrls: ['./payment.component.scss']
 })
 export class PaymentComponent implements OnInit {
     paymentForm: FormGroup;
     order: any;
+    isReady: boolean = false;
     qrCodeUrl: string = 'assets/images/qr-code.png'; // Replace with actual QR code URL
     accountNumber: string = '123456789';
     private storage = inject(Storage);
@@ -26,31 +27,57 @@ export class PaymentComponent implements OnInit {
     constructor(
         private fb: FormBuilder,
         private router: Router,
-        private orderService: OrdersService
+        private orderService: OrdersService,
+        private toastr: ToastrService
     ) {
-        const navigation = this.router.getCurrentNavigation();
-        this.order = navigation?.extras.state?.order;
-
         this.paymentForm = this.fb.group({
             proofOfPayment: [null, Validators.required]
         });
     }
 
     ngOnInit(): void {
-        console.log("order",this.order);
-        
+        this.loadOrderData();
+        console.log('order', this.order);
     }
 
-    uploadProof(event: any): void {
+    async loadOrderData() {
+        await new Promise((resolve) => setTimeout(resolve, 0)); // micro-task queue adjustment
+        this.order = history.state.order;
+
+        if (!this.order) {
+            console.error('Order data not found');
+            this.router.navigate(['/products']);
+            this.isReady = false;
+        } else {
+            console.log('Order data received', this.order);
+            this.isReady = true;
+        }
+    }
+
+    handleFile(event: any) {
+        this.paymentForm.get('proofOfPayment')?.setValue(event.target.files[0]);
+    }
+
+    onSubmit(): void {
+        console.log(this.paymentForm);
+        console.log(this.paymentForm.get('proofOfPayment')?.value);
+        if (this.paymentForm.invalid) {
+            return;
+        }
+        this.uploadProof();
+    }
+
+    uploadProof(): void {
         try {
-            const file = event.target.files[0];
+            const file = this.paymentForm.get('proofOfPayment')?.value;
             const filePath = `proofOfPayments/${Date.now()}_${file.name}`;
             const fileRef = ref(this.storage, filePath);
             const uploadTask = uploadBytesResumable(fileRef, file);
-            uploadTask.then((snapshot) => {
+
+            uploadTask.then(() => {
                 getDownloadURL(fileRef)
                     .then((url) => {
-                      console.log(`Download URL: ${url}`);
+                        console.log(`Download URL: ${url}`);
                         this.saveProofOfPayment(url);
                     })
                     .catch((error) => {
@@ -66,19 +93,23 @@ export class PaymentComponent implements OnInit {
         const updatedOrder = {
             ...this.order,
             buktiPesanan: url,
-            status: "PAYMENT",
+            status: 'SUDAH BAYAR'
         };
 
         this.orderService
             .updateOrder(this.order.id, updatedOrder)
             .then(() => {
                 console.log('Proof of payment uploaded and order updated');
-                this.router.navigate(['/confirmation'], {
+                this.toastr.success(
+                    'Proof of payment uploaded and order updated, please wait for WhatsApp confirmation'
+                );
+                this.router.navigate(['/payment-confirm'], {
                     state: {order: updatedOrder}
                 });
             })
             .catch((error) => {
                 console.error('Error updating order: ', error);
+                this.toastr.error('Error updating order');
             });
     }
 }

@@ -1,49 +1,78 @@
 <!-- src/app/components/checkout/checkout.component.html -->
-<div class="checkout">
+<div class="checkout py-5">
     <div class="container">
-        <div *ngIf="product">
-            <h2>Checkout</h2>
-            <img class="header-image" [src]="product.imageUrl" alt="" />
-            <h3>{{ product.title }}</h3>
-            <p>Category: {{ product.category }}</p>
-            <p>Price: {{ product.price }}</p>
-            <ul>
-                <li>Max Guests: {{ product.details.maxGuests }}</li>
-                <li>Duration: {{ product.details.duration }}</li>
-                <li>Location: {{ product.details.location }}</li>
-                <li>Amenities: {{ product.details.amenities.join(', ') }}</li>
-            </ul>
-            <form [formGroup]="checkoutForm" (ngSubmit)="proceedToPayment()">
-                <mat-form-field appearance="fill">
-                    <mat-label>Event Date Range</mat-label>
-                    <mat-date-range-input
-                        [formGroup]="checkoutForm"
-                        [rangePicker]="eventDateRangePicker"
-                    >
-                        <input
-                            matStartDate
-                            formControlName="tanggalEventMulai"
-                            placeholder="Start date"
-                        />
-                        <input
-                            matEndDate
-                            formControlName="tanggalEventAkhir"
-                            placeholder="End date"
-                        />
-                    </mat-date-range-input>
-                    <mat-hint>DD/MM/YY – DD/MM/YY</mat-hint>
-                    <mat-datepicker-toggle
-                        matIconSuffix
-                        [for]="eventDateRangePicker"
-                    ></mat-datepicker-toggle>
-                    <mat-date-range-picker
-                        #eventDateRangePicker
-                    ></mat-date-range-picker>
-                </mat-form-field>
-                <button type="submit" [disabled]="checkoutForm.invalid">
-                    Proceed to Payment
-                </button>
-            </form>
+        <div *ngIf="product" class="card">
+            <div class="card-header text-center">
+                <h2 class="card-title">Checkout</h2>
+                <img
+                    class="img-fluid header-image my-3"
+                    [src]="product.imageUrl"
+                    alt="{{ product.title }}"
+                />
+            </div>
+            <div class="card-body">
+                <h3 class="card-subtitle mb-2">{{ product.title }}</h3>
+                <p class="text-muted">Category: {{ product.category }}</p>
+                <p class="text-muted">
+                    Price: {{ product.price | currency: 'IDR' }}
+                </p>
+                <ul class="list-group mb-4">
+                    <li class="list-group-item">
+                        Max Guests: {{ product.details.maxGuests }}
+                    </li>
+                    <li class="list-group-item">
+                        Duration: {{ product.details.duration }}
+                    </li>
+                    <li class="list-group-item">
+                        Location: {{ product.details.location }}
+                    </li>
+                    <li class="list-group-item">
+                        Amenities: {{ product.details.amenities.join(', ') }}
+                    </li>
+                </ul>
+                <form
+                    [formGroup]="checkoutForm"
+                    (ngSubmit)="proceedToPayment()"
+                >
+                    <div class="mb-3">
+                        <mat-form-field appearance="fill" class="w-100">
+                            <mat-label>Event Date Range</mat-label>
+                            <mat-date-range-input
+                                [formGroup]="checkoutForm"
+                                [rangePicker]="eventDateRangePicker"
+                            >
+                                <input
+                                    matStartDate
+                                    formControlName="tanggalEventMulai"
+                                    placeholder="Start date"
+                                />
+                                <input
+                                    matEndDate
+                                    formControlName="tanggalEventAkhir"
+                                    placeholder="End date"
+                                />
+                            </mat-date-range-input>
+                            <mat-hint>DD/MM/YY – DD/MM/YY</mat-hint>
+                            <mat-datepicker-toggle
+                                matIconSuffix
+                                [for]="eventDateRangePicker"
+                            ></mat-datepicker-toggle>
+                            <mat-date-range-picker
+                                #eventDateRangePicker
+                            ></mat-date-range-picker>
+                        </mat-form-field>
+                    </div>
+                    <div class="text-center">
+                        <button
+                            type="submit"
+                            class="btn btn-primary"
+                            [disabled]="checkoutForm.invalid"
+                        >
+                            Proceed to Payment
+                        </button>
+                    </div>
+                </form>
+            </div>
         </div>
     </div>
 </div>

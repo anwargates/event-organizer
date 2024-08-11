@@ -1,20 +1,16 @@
-import { Component, OnInit } from '@angular/core';
-import { AppService } from '@services/app.service';
-import { User } from 'firebase/auth';
+import {Component, OnInit} from '@angular/core';
+import {AppService} from '@services/app.service';
+import {User} from 'firebase/auth';
 
 @Component({
-  selector: 'app-home-header',
-  templateUrl: './home-header.component.html',
-  styleUrl: './home-header.component.scss'
+    selector: 'app-home-header',
+    templateUrl: './home-header.component.html',
+    styleUrl: './home-header.component.scss'
 })
-export class HomeHeaderComponent implements OnInit{
-  public user?: User | null = null;
+export class HomeHeaderComponent implements OnInit {
+    constructor(public appService: AppService) {}
 
-  constructor(public appService: AppService) {}
-
-  ngOnInit(): void {
-    // this.appService.getProfile();
-      this.user = this.appService.user;
-      console.log("user status",this.user);   
-  }
+    ngOnInit(): void {
+        console.log('user status', this.appService.user);
+    }
 }

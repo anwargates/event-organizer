@@ -1,16 +1,16 @@
 <mat-table [dataSource]="orders" matSort matPaginator>
     <ng-container matColumnDef="userId">
         <mat-header-cell *matHeaderCellDef mat-sort-header
-            >User ID</mat-header-cell
+            >User</mat-header-cell
         >
-        <mat-cell *matCellDef="let order">{{ order.userId }}</mat-cell>
+        <mat-cell *matCellDef="let order">{{ order.userName }}</mat-cell>
     </ng-container>
 
     <ng-container matColumnDef="productId">
         <mat-header-cell *matHeaderCellDef mat-sort-header
-            >Product ID</mat-header-cell
+            >Product</mat-header-cell
         >
-        <mat-cell *matCellDef="let order">{{ order.productId }}</mat-cell>
+        <mat-cell *matCellDef="let order">{{ order.productName }}</mat-cell>
     </ng-container>
 
     <ng-container matColumnDef="tanggalPesanan">
@@ -67,9 +67,18 @@
             <button
                 mat-icon-button
                 color="primary"
-                [routerLink]="['/edit', order.id]"
+                *ngIf="isAdmin()"
+                (click)="openConfirmationDialog(order.id)"
             >
-                <mat-icon>edit</mat-icon>
+                <mat-icon>check</mat-icon>
+            </button>
+            <button
+                mat-icon-button
+                color="primary"
+                *ngIf="isNotPaid(order)"
+                (click)="navigateToPayment(order)"
+            >
+                <mat-icon>attach_money</mat-icon>
             </button>
         </mat-cell>
     </ng-container>
@@ -77,6 +86,6 @@
     <mat-header-row *matHeaderRowDef="displayedColumns"></mat-header-row>
     <mat-row *matRowDef="let row; columns: displayedColumns"></mat-row>
 </mat-table>
-<button mat-raised-button color="primary" [routerLink]="['/dashboard/add']">
+<button mat-raised-button color="primary" [routerLink]="['/products']">
     Add Order
 </button>

@@ -21,14 +21,26 @@ export class MenuSidebarComponent implements OnInit {
     constructor(
         public appService: AppService,
         private store: Store<AppState>
-    ) {}
+    ) {
+        this.appService.getRole();
+        this.user = this.appService.user;
+    }
 
     ngOnInit() {
         this.ui = this.store.select('ui');
         this.ui.subscribe((state: UiState) => {
             this.classes = `${BASE_CLASSES} ${state.sidebarSkin}`;
         });
-        this.user = this.appService.user;
+        this.filterMenuByRole();
+    }
+
+    private filterMenuByRole() {
+        if (this.appService.user && this.appService.role === 'ADMIN') {
+            this.menu = MENU; // Full menu for admins
+        } else {
+            // Exclude Products menu for non-admin users
+            this.menu = MENU.filter((item) => item.name !== 'Products');
+        }
     }
 }
 

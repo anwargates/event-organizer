@@ -71,18 +71,24 @@ import {
     MAT_DATE_FORMATS,
     MAT_DATE_LOCALE
 } from '@angular/material/core';
-import { HomeComponent } from './modules/home/home.component';
-import { LandingComponent } from './pages/landing/landing.component';
-import { HomeHeaderComponent } from '@modules/home/header/home-header.component';
-import { CarouselModule } from 'ngx-owl-carousel-o';
-import { ProductsComponent } from './pages/products/products.component';
-import { CheckoutComponent } from './pages/checkout/checkout.component';
-import { PaymentComponent } from './pages/payment/payment.component';
-import { StorageModule } from '@angular/fire/storage';
-import { OrderProofDialogComponentComponent } from './components/modals/order-proof-dialog-component/order-proof-dialog-component.component';
-import { TableProductsComponent } from './components/table/table-products/table-products.component';
-import { ProductsTableComponent } from './pages/products-table/products-table.component';
-import { ProductsFormComponent } from './pages/products-form/products-form.component';
+import {HomeComponent} from './modules/home/home.component';
+import {LandingComponent} from './pages/landing/landing.component';
+import {HomeHeaderComponent} from '@modules/home/header/home-header.component';
+import {CarouselModule} from 'ngx-owl-carousel-o';
+import {ProductsComponent} from './pages/products/products.component';
+import {CheckoutComponent} from './pages/checkout/checkout.component';
+import {PaymentComponent} from './pages/payment/payment.component';
+import {StorageModule} from '@angular/fire/storage';
+import {OrderProofDialogComponentComponent} from './components/modals/order-proof-dialog-component/order-proof-dialog-component.component';
+import {TableProductsComponent} from './components/table/table-products/table-products.component';
+import {ProductsTableComponent} from './pages/products-table/products-table.component';
+import {ProductsFormComponent} from './pages/products-form/products-form.component';
+import {NgbModule} from '@ng-bootstrap/ng-bootstrap';
+import {PaymentConfirmComponent} from './pages/payment-confirm/payment-confirm.component';
+import {ConfirmationFormComponent} from './pages/confirmation-form/confirmation-form.component';
+import {ConfirmationModalComponent} from './components/modals/confirmation-modal/confirmation-modal.component';
+import {DeleteConfirmationDialogComponent} from './components/modals/delete-confirmation-dialog/delete-confirmation-dialog.component';
+import {MatDialogModule} from '@angular/material/dialog';
 
 registerLocaleData(localeEn, 'en-EN');
 
@@ -130,7 +136,11 @@ registerLocaleData(localeEn, 'en-EN');
         OrderProofDialogComponentComponent,
         TableProductsComponent,
         ProductsTableComponent,
-        ProductsFormComponent
+        ProductsFormComponent,
+        PaymentConfirmComponent,
+        ConfirmationFormComponent,
+        ConfirmationModalComponent,
+        DeleteConfirmationDialogComponent
     ],
     bootstrap: [AppComponent],
     imports: [
@@ -160,7 +170,9 @@ registerLocaleData(localeEn, 'en-EN');
         // MatNativeDateModule,
         MatMomentDateModule,
         CarouselModule,
-        StorageModule
+        StorageModule,
+        NgbModule,
+        MatDialogModule
     ],
     providers: [
         provideHttpClient(withInterceptorsFromDi()),

@@ -183,7 +183,7 @@ body {
 .main-button a {
   display: inline-block;
   background-color: #1e1e1e;
-  color: #fff;
+  color: #fff !important;
   font-size: 14px;
   font-weight: 500;
   height: 40px;
@@ -191,6 +191,7 @@ body {
   padding: 0px 30px;
   border-radius: 25px;
   transition: all .3s;
+  cursor: pointer;
 }
 
 .main-button a:hover {
@@ -1236,7 +1237,7 @@ Best Deal Style
   margin-bottom: 80px;
   align-items: end;
   justify-content: end;
-  margin-top: -130px;
+  /* margin-top: -130px; */
 }
 
 .best-deal .tabs-content ul.nav-tabs li {

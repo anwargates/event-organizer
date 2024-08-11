@@ -1,0 +1,34 @@
+<h1 mat-dialog-title class="p-4">Confirm Order</h1>
+<div mat-dialog-content class="p-4">
+    <form [formGroup]="orderForm" (ngSubmit)="onSubmit()" class="order-form">
+        <div>
+            <mat-form-field appearance="fill">
+                <mat-label>Status</mat-label>
+                <mat-select formControlName="status" name="status">
+                    @for (status of statusList; track status) {
+                        <mat-option [value]="status.value">{{
+                            status.viewValue
+                        }}</mat-option>
+                    }
+                </mat-select>
+            </mat-form-field>
+        </div>
+
+        <div>
+            <mat-form-field appearance="fill">
+                <mat-label>Komentar</mat-label>
+                <input
+                    matInput
+                    id="komentar"
+                    formControlName="komentar"
+                    type="text"
+                />
+            </mat-form-field>
+        </div>
+
+        <button mat-raised-button color="primary" type="submit">Submit</button>
+    </form>
+</div>
+<div mat-dialog-actions class="p-4">
+    <button mat-button (click)="onClose()">Close</button>
+</div>

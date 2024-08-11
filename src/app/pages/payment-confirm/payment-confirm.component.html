@@ -1,0 +1,22 @@
+<div class="payment-result container py-5">
+    <div class="card">
+        <div class="card-body text-center">
+            <h2 class="card-title" *ngIf="isSuccess">Payment Successful</h2>
+            <h2 class="card-title" *ngIf="!isSuccess">Payment Failed</h2>
+
+            <p *ngIf="isSuccess" class="text-success">
+                Your payment was processed successfully. Your transaction number
+                is:
+            </p>
+            <h4 *ngIf="isSuccess" class="text-info">{{ transactionNumber }}</h4>
+
+            <p *ngIf="!isSuccess" class="text-danger">
+                There was an issue processing your payment. Please try again.
+            </p>
+
+            <a routerLink="/dashboard" class="btn btn-primary mt-3"
+                >Go to Dashboard</a
+            >
+        </div>
+    </div>
+</div>

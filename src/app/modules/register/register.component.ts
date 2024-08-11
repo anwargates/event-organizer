@@ -36,7 +36,8 @@ export class RegisterComponent implements OnInit, OnDestroy {
         this.registerForm = new UntypedFormGroup({
             email: new UntypedFormControl(null, Validators.required),
             password: new UntypedFormControl(null, [Validators.required]),
-            retypePassword: new UntypedFormControl(null, [Validators.required])
+            retypePassword: new UntypedFormControl(null, [Validators.required]),
+            phoneNumber: new UntypedFormControl(null, [Validators.required])
         });
     }
 
@@ -47,6 +48,7 @@ export class RegisterComponent implements OnInit, OnDestroy {
                 this.registerForm.value.email,
                 this.registerForm.value.password,
                 this.registerForm.value.displayName,
+                this.registerForm.value.phoneNumber,
             );
             this.isAuthLoading = false;
         } else {

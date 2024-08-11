@@ -5,13 +5,15 @@
         <div *ngIf="order">
             <img [src]="qrCodeUrl" alt="QR Code" />
             <p>Account Number: {{ accountNumber }}</p>
-            <form [formGroup]="paymentForm" (ngSubmit)="uploadProof($event)">
+            <form [formGroup]="paymentForm" (ngSubmit)="onSubmit()">
                 <input
                     type="file"
-                    formControlName="proofOfPayment"
-                    (change)="uploadProof($event)"
+                    (change)="handleFile($event)"
                 />
-                <button type="submit" [disabled]="paymentForm.invalid">
+                <button
+                    type="submit"
+                    [disabled]="paymentForm.invalid || !isReady"
+                >
                     Submit Proof of Payment
                 </button>
             </form>

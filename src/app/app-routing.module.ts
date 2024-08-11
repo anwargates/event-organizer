@@ -20,6 +20,8 @@ import { CheckoutComponent } from '@pages/checkout/checkout.component';
 import { PaymentComponent } from '@pages/payment/payment.component';
 import { ProductsTableComponent } from '@pages/products-table/products-table.component';
 import { ProductsFormComponent } from '@pages/products-form/products-form.component';
+import { PaymentConfirmComponent } from '@pages/payment-confirm/payment-confirm.component';
+import { AdminGuard } from '@guards/admin.guard';
 
 const routes: Routes = [
     {
@@ -66,11 +68,18 @@ const routes: Routes = [
             },
             {
                 path: 'products',
+                canActivate:[AdminGuard],
                 component: ProductsTableComponent
             },
             {
                 path: 'products/edit',
+                canActivate:[AdminGuard],
                 component: ProductsFormComponent
+            },
+            {
+                path: 'payment-confirm',
+                canActivate:[AdminGuard],
+                component: PaymentConfirmComponent
             },
             {
                 path: '',

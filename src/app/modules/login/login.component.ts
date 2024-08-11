@@ -42,7 +42,8 @@ export class LoginComponent implements OnInit, OnDestroy {
         this.registerForm = new UntypedFormGroup({
             displayName: new UntypedFormControl(null, Validators.required),
             email: new UntypedFormControl(null, Validators.required),
-            password: new UntypedFormControl(null, Validators.required)
+            password: new UntypedFormControl(null, Validators.required),
+            phoneNumber: new UntypedFormControl(null, Validators.required)
         });
     }
 
@@ -73,6 +74,7 @@ export class LoginComponent implements OnInit, OnDestroy {
                 this.registerForm.value.email,
                 this.registerForm.value.password,
                 this.registerForm.value.displayName,
+                this.registerForm.value.phoneNumber
             );
             this.isAuthLoading = false;
         } else {
