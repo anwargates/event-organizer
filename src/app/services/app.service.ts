@@ -3,11 +3,12 @@ import { Router } from '@angular/router';
 import { ToastrService } from 'ngx-toastr';
 import { sleep } from '@/utils/helpers';
 
-import { createUserWithEmailAndPassword } from '@firebase/auth';
-import { User, onAuthStateChanged, signInWithEmailAndPassword, signInWithPopup, updateProfile } from 'firebase/auth';
-import { GoogleAuthProvider } from 'firebase/auth';
-import { firebaseAuth } from '@/firebase';
+// import { createUserWithEmailAndPassword } from '@firebase/auth';
+// import { User, onAuthStateChanged, signInWithEmailAndPassword, signInWithPopup, updateProfile } from 'firebase/auth';
+// import { GoogleAuthProvider } from 'firebase/auth';
+// import { firebaseAuth } from '@/firebase';
 import { addDoc, collection, doc, docData, Firestore, getDoc, setDoc } from '@angular/fire/firestore';
+import { createUserWithEmailAndPassword, getAuth, GoogleAuthProvider, onAuthStateChanged, signInWithEmailAndPassword, signInWithPopup, updateProfile, User } from '@angular/fire/auth';
 
 const provider = new GoogleAuthProvider();
 
@@ -25,7 +26,7 @@ export class AppService {
         private firestore: Firestore
     ) {
         onAuthStateChanged(
-            firebaseAuth,
+            getAuth(),
             (user) => {
                 if (user) {
                     this.user = user;
@@ -47,7 +48,7 @@ export class AppService {
     ) {
         try {
             const result = await createUserWithEmailAndPassword(
-                firebaseAuth,
+                getAuth(),
                 email,
                 password
             );
@@ -69,7 +70,7 @@ export class AppService {
     async loginWithEmail(email: string, password: string) {
         try {
             const result = await signInWithEmailAndPassword(
-                firebaseAuth,
+                getAuth(),
                 email,
                 password
             );
@@ -84,7 +85,7 @@ export class AppService {
 
     async signInByGoogle() {
         try {
-            const result = await signInWithPopup(firebaseAuth, provider);
+            const result = await signInWithPopup(getAuth(), provider);
             this.user = result.user;
 
             this.router.navigate(['/dashboard']);
@@ -123,7 +124,7 @@ export class AppService {
     async getProfile() {
         try {
             await sleep(500);
-            const user = firebaseAuth.currentUser;
+            const user = getAuth().currentUser;
             if (user) {
                 this.user = user;
             } else {
@@ -136,7 +137,7 @@ export class AppService {
     }
 
     async logout() {
-        await firebaseAuth.signOut();
+        await getAuth().signOut();
         this.user = null;
         this.router.navigate(['/login']);
     }

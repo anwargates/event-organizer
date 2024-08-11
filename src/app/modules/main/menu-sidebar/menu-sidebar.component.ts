@@ -15,7 +15,7 @@ const BASE_CLASSES = 'main-sidebar elevation-4';
 export class MenuSidebarComponent implements OnInit {
     @HostBinding('class') classes: string = BASE_CLASSES;
     public ui: Observable<UiState>;
-    public user?: User;
+    // public user?: User;
     public menu = MENU;
 
     constructor(
@@ -23,7 +23,7 @@ export class MenuSidebarComponent implements OnInit {
         private store: Store<AppState>
     ) {
         this.appService.getRole();
-        this.user = this.appService.user;
+        // this.user = this.appService.user;
     }
 
     ngOnInit() {

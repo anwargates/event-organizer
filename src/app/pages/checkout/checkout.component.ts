@@ -4,7 +4,8 @@ import {FormBuilder, FormGroup, Validators} from '@angular/forms';
 import {Router} from '@angular/router';
 import {AppService} from '@services/app.service';
 import {OrdersService} from '@services/orders.service';
-import {firebaseAuth} from '@/firebase';
+import {getAuth} from 'firebase/auth';
+// import {firebaseAuth} from '@/firebase';
 import {ToastrService} from 'ngx-toastr';
 
 @Component({
@@ -44,8 +45,8 @@ export class CheckoutComponent {
 
             const formData = this.checkoutForm.value;
             const newOrder: Order = {
-                userId: firebaseAuth.currentUser.uid,
-                userName: firebaseAuth.currentUser.displayName,
+                userId: getAuth().currentUser.uid,
+                userName: getAuth().currentUser.displayName,
                 productId: this.product.id,
                 productName: this.product.title,
                 tanggalPesanan: new Date(),

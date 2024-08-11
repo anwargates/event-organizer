@@ -89,6 +89,7 @@ import {ConfirmationFormComponent} from './pages/confirmation-form/confirmation-
 import {ConfirmationModalComponent} from './components/modals/confirmation-modal/confirmation-modal.component';
 import {DeleteConfirmationDialogComponent} from './components/modals/delete-confirmation-dialog/delete-confirmation-dialog.component';
 import {MatDialogModule} from '@angular/material/dialog';
+import {AngularFireModule} from '@angular/fire/compat';
 
 registerLocaleData(localeEn, 'en-EN');
 
@@ -172,7 +173,8 @@ registerLocaleData(localeEn, 'en-EN');
         CarouselModule,
         StorageModule,
         NgbModule,
-        MatDialogModule
+        MatDialogModule,
+        AngularFireModule.initializeApp(environment.FIREBASE_CONFIG)
     ],
     providers: [
         provideHttpClient(withInterceptorsFromDi()),
