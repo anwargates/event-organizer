@@ -90,6 +90,7 @@ import {ConfirmationModalComponent} from './components/modals/confirmation-modal
 import {DeleteConfirmationDialogComponent} from './components/modals/delete-confirmation-dialog/delete-confirmation-dialog.component';
 import {MatDialogModule} from '@angular/material/dialog';
 import {AngularFireModule} from '@angular/fire/compat';
+import { EditProductsDialogComponent } from './components/modals/edit-products-dialog/edit-products-dialog.component';
 
 registerLocaleData(localeEn, 'en-EN');
 
@@ -141,7 +142,8 @@ registerLocaleData(localeEn, 'en-EN');
         PaymentConfirmComponent,
         ConfirmationFormComponent,
         ConfirmationModalComponent,
-        DeleteConfirmationDialogComponent
+        DeleteConfirmationDialogComponent,
+        EditProductsDialogComponent
     ],
     bootstrap: [AppComponent],
     imports: [

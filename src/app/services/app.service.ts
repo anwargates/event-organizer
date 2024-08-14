@@ -27,6 +27,7 @@ export class AppService {
             (user) => {
                 if (user) {
                     this.user = user;
+                    this.getRole();
                 } else {
                     this.user = undefined;
                 }
@@ -124,6 +125,7 @@ export class AppService {
             const user = getAuth().currentUser;
             if (user) {
                 this.user = user;
+                this.getRole();
             } else {
                 this.logout();
             }

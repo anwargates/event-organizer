@@ -14,14 +14,14 @@ import {SubMenuComponent} from '@pages/main-menu/sub-menu/sub-menu.component';
 import {OrdersComponent} from '@pages/orders/orders/orders.component';
 import {OrderFormComponent} from '@pages/order-form/order-form.component';
 import {HomeComponent} from '@modules/home/home.component';
-import { LandingComponent } from '@pages/landing/landing.component';
-import { ProductsComponent } from '@pages/products/products.component';
-import { CheckoutComponent } from '@pages/checkout/checkout.component';
-import { PaymentComponent } from '@pages/payment/payment.component';
-import { ProductsTableComponent } from '@pages/products-table/products-table.component';
-import { ProductsFormComponent } from '@pages/products-form/products-form.component';
-import { PaymentConfirmComponent } from '@pages/payment-confirm/payment-confirm.component';
-import { AdminGuard } from '@guards/admin.guard';
+import {LandingComponent} from '@pages/landing/landing.component';
+import {ProductsComponent} from '@pages/products/products.component';
+import {CheckoutComponent} from '@pages/checkout/checkout.component';
+import {PaymentComponent} from '@pages/payment/payment.component';
+import {ProductsTableComponent} from '@pages/products-table/products-table.component';
+import {ProductsFormComponent} from '@pages/products-form/products-form.component';
+import {PaymentConfirmComponent} from '@pages/payment-confirm/payment-confirm.component';
+import {AdminGuard} from '@guards/admin.guard';
 
 const routes: Routes = [
     {
@@ -64,27 +64,29 @@ const routes: Routes = [
             },
             {
                 path: 'add',
+                canActivate: [AdminGuard],
                 component: OrderFormComponent
             },
             {
                 path: 'products',
-                canActivate:[AdminGuard],
+                canActivate: [AdminGuard],
                 component: ProductsTableComponent
             },
-            {
-                path: 'products/edit',
-                canActivate:[AdminGuard],
-                component: ProductsFormComponent
-            },
+            // {
+            //     path: 'edit-products',
+            //     canActivate: [AdminGuard],
+            //     component: ProductsFormComponent
+            // },
             {
                 path: 'payment-confirm',
-                canActivate:[AdminGuard],
+                canActivate: [AdminGuard],
                 component: PaymentConfirmComponent
             },
             {
                 path: '',
                 component: DashboardComponent
-            }
+            },
+            {path: '**', redirectTo: 'login'}
         ]
     },
     {
@@ -107,7 +109,7 @@ const routes: Routes = [
         component: RecoverPasswordComponent,
         canActivate: [NonAuthGuard]
     },
-    {path: '**', redirectTo: 'login'}
+    {path: '**', redirectTo: ''}
 ];
 
 @NgModule({

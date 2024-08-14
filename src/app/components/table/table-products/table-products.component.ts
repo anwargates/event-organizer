@@ -5,6 +5,7 @@ import {MatDialog} from '@angular/material/dialog';
 import {MatPaginator} from '@angular/material/paginator';
 import {MatSort} from '@angular/material/sort';
 import {MatTableDataSource} from '@angular/material/table';
+import {EditProductsDialogComponent} from '@components/modals/edit-products-dialog/edit-products-dialog.component';
 import {OrderProofDialogComponentComponent} from '@components/modals/order-proof-dialog-component/order-proof-dialog-component.component';
 import {OrdersService} from '@services/orders.service';
 import {ProductsService} from '@services/products.service';
@@ -83,6 +84,12 @@ export class TableProductsComponent {
     openDialog(buktiPesanan: string): void {
         this.dialog.open(OrderProofDialogComponentComponent, {
             data: {buktiPesanan}
+        });
+    }
+
+    openEditDialog(product: any) {
+        this.dialog.open(EditProductsDialogComponent, {
+            data: product
         });
     }
 }

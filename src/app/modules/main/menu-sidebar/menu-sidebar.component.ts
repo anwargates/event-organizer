@@ -3,7 +3,6 @@ import {UiState} from '@/store/ui/state';
 import {Component, HostBinding, OnInit} from '@angular/core';
 import {Store} from '@ngrx/store';
 import {AppService} from '@services/app.service';
-import {User} from 'firebase/auth';
 import {Observable} from 'rxjs';
 
 const BASE_CLASSES = 'main-sidebar elevation-4';
@@ -22,8 +21,6 @@ export class MenuSidebarComponent implements OnInit {
         public appService: AppService,
         private store: Store<AppState>
     ) {
-        this.appService.getRole();
-        // this.user = this.appService.user;
     }
 
     ngOnInit() {
@@ -34,7 +31,7 @@ export class MenuSidebarComponent implements OnInit {
         this.filterMenuByRole();
     }
 
-    private filterMenuByRole() {
+    private filterMenuByRole() {        
         if (this.appService.user && this.appService.role === 'ADMIN') {
             this.menu = MENU; // Full menu for admins
         } else {

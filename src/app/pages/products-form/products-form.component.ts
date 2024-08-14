@@ -1,7 +1,8 @@
 import {Order} from '@/models/orders';
+import { Products } from '@/models/products';
 import {Component} from '@angular/core';
 import {FormBuilder, FormGroup, Validators} from '@angular/forms';
-import {Router} from '@angular/router';
+import {ActivatedRoute, Router} from '@angular/router';
 import {OrdersService} from '@services/orders.service';
 
 @Component({
@@ -12,15 +13,17 @@ import {OrdersService} from '@services/orders.service';
 export class ProductsFormComponent {
     productsForm!: FormGroup;
     isDisable: boolean = true;
+    product: Products;
 
     constructor(
         private fb: FormBuilder,
         private router: Router,
-        private ordersService: OrdersService
+        private ordersService: OrdersService,
+        private route: ActivatedRoute
     ) {
         this.productsForm = this.fb.group({
             id: ['', Validators.required],
-            price: ['', Validators.required],
+            price: ['', Validators.required]
         });
     }
     onSubmit(): void {

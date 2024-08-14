@@ -50,12 +50,12 @@
             >Price</mat-header-cell
         >
         <mat-cell *matCellDef="let package">{{
-            package.price | currency: 'IDR' 
+            package.price | currency: 'IDR'
         }}</mat-cell>
     </ng-container>
 
     <ng-container matColumnDef="orderProof">
-        <mat-header-cell *matHeaderCellDef>Order Proof</mat-header-cell>
+        <mat-header-cell *matHeaderCellDef>Product Thumbnail</mat-header-cell>
         <mat-cell *matCellDef="let package">
             <button mat-button (click)="openDialog(package.imageUrl)">
                 View
@@ -66,17 +66,17 @@
     <ng-container matColumnDef="actions">
         <mat-header-cell *matHeaderCellDef>Actions</mat-header-cell>
         <mat-cell *matCellDef="let package">
-            <button
+            <!-- <button
                 mat-icon-button
                 color="warn"
                 (click)="deleteOrder(package.id)"
             >
                 <mat-icon>delete</mat-icon>
-            </button>
+            </button> -->
             <button
                 mat-icon-button
                 color="primary"
-                [routerLink]="['/dashboard/products/edit', package.id]"
+                (click)="openEditDialog(package)"
             >
                 <mat-icon>edit</mat-icon>
             </button>
