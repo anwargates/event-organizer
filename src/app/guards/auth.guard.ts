@@ -41,18 +41,29 @@ export class AuthGuard implements CanActivate, CanActivateChild {
         return this.canActivate(next, state);
     }
 
-    async getProfile() {
+    async getProfile(): Promise<boolean> {
+        console.log('current profile is:', this.appService.user);
+
         if (this.appService.user) {
-            console.log('user is fetched');
+            console.log('user exists');
             return true;
         }
 
         try {
+            console.log('no user exists, fetching profile');
             await this.appService.getProfile();
-            console.log('success get profile');
-            return true;
+
+            if (this.appService.user) {
+                console.log('success get profile:', this.appService.user);
+                return true;
+            } else {
+                console.log('no user after fetching profile');
+                this.router.navigate(['/login']);
+                return false;
+            }
         } catch (error) {
             console.log('error get profile', error);
+            this.router.navigate(['/login']);
             return false;
         }
     }

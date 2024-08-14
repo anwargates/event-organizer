@@ -5,6 +5,8 @@ import {MatDialog} from '@angular/material/dialog';
 import {MatPaginator} from '@angular/material/paginator';
 import {MatSort} from '@angular/material/sort';
 import {MatTableDataSource} from '@angular/material/table';
+import {AddProductsDialogComponent} from '@components/modals/add-products-dialog/add-products-dialog.component';
+import { DeleteConfirmationDialogComponent } from '@components/modals/delete-confirmation-dialog/delete-confirmation-dialog.component';
 import {EditProductsDialogComponent} from '@components/modals/edit-products-dialog/edit-products-dialog.component';
 import {OrderProofDialogComponentComponent} from '@components/modals/order-proof-dialog-component/order-proof-dialog-component.component';
 import {OrdersService} from '@services/orders.service';
@@ -74,11 +76,24 @@ export class TableProductsComponent {
         });
     }
 
-    deleteOrder(orderId: string) {
-        // this.ordersService.deleteOrder(orderId).then(() => {
-        //     console.log('Order deleted successfully');
-        // });
-        this.toastr.info('Delete is disabled');
+    deleteProduct(orderId: string) {
+        const dialogRef = this.dialog.open(DeleteConfirmationDialogComponent);
+
+        dialogRef.afterClosed().subscribe((result) => {
+            if (result) {
+                this.productsService
+                    .deleteProduct(orderId)
+                    .then(() => {
+                        console.log('Order deleted successfully');
+                        this.toastr.success('Order deleted successfully');
+                        // this.refreshOrders();
+                    })
+                    .catch((error) => {
+                        console.error('Failed to delete order', error);
+                        this.toastr.error('Failed to delete order');
+                    });
+            }
+        });
     }
 
     openDialog(buktiPesanan: string): void {
@@ -91,5 +106,9 @@ export class TableProductsComponent {
         this.dialog.open(EditProductsDialogComponent, {
             data: product
         });
+    }
+
+    openAddDialog() {
+        this.dialog.open(AddProductsDialogComponent);
     }
 }

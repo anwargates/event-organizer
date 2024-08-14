@@ -1,11 +1,27 @@
-import { Injectable } from '@angular/core';
-import { Router } from '@angular/router';
-import { ToastrService } from 'ngx-toastr';
-import { sleep } from '@/utils/helpers';
+import {Injectable} from '@angular/core';
+import {Router} from '@angular/router';
+import {ToastrService} from 'ngx-toastr';
+import {sleep} from '@/utils/helpers';
 
-
-import { addDoc, collection, doc, docData, Firestore, getDoc, setDoc } from '@angular/fire/firestore';
-import { createUserWithEmailAndPassword, getAuth, GoogleAuthProvider, onAuthStateChanged, signInWithEmailAndPassword, signInWithPopup, updateProfile, User } from '@angular/fire/auth';
+import {
+    addDoc,
+    collection,
+    doc,
+    docData,
+    Firestore,
+    getDoc,
+    setDoc
+} from '@angular/fire/firestore';
+import {
+    createUserWithEmailAndPassword,
+    getAuth,
+    GoogleAuthProvider,
+    onAuthStateChanged,
+    signInWithEmailAndPassword,
+    signInWithPopup,
+    updateProfile,
+    User
+} from '@angular/fire/auth';
 
 const provider = new GoogleAuthProvider();
 
@@ -25,8 +41,10 @@ export class AppService {
         onAuthStateChanged(
             getAuth(),
             (user) => {
+                console.log('getting auth..');
                 if (user) {
                     this.user = user;
+                    console.log('user :', user);
                     this.getRole();
                 } else {
                     this.user = undefined;
@@ -42,7 +60,7 @@ export class AppService {
         email: string,
         password: string,
         displayName: string,
-        phoneNumber: string, // Include phone number in the parameters
+        phoneNumber: string // Include phone number in the parameters
     ) {
         try {
             const result = await createUserWithEmailAndPassword(
@@ -52,7 +70,7 @@ export class AppService {
             );
             if (result.user) {
                 await updateProfile(result.user, {
-                    displayName: displayName,
+                    displayName: displayName
                 });
                 await this.registerDetails(phoneNumber); // Pass the phone number to registerDetails
             }
@@ -97,10 +115,10 @@ export class AppService {
         try {
             // Reference to the user document
             const userDocRef = doc(this.firestore, `users/${this.user.uid}`);
-    
+
             // Check if the user document already exists
             const userSnapshot = await getDoc(userDocRef);
-    
+
             if (!userSnapshot.exists()) {
                 // Add the user document with role 'USER' and phone number if it does not exist
                 await setDoc(userDocRef, {
@@ -120,15 +138,20 @@ export class AppService {
     }
 
     async getProfile() {
+        console.log('getting profile...');
         try {
+            console.log('awaiting for 500ms...');
             await sleep(500);
+            console.log('awaiting done');
             const user = getAuth().currentUser;
             if (user) {
                 this.user = user;
-                this.getRole();
+                console.log('user fetched, getting role..');
+                await this.getRole();
             } else {
                 this.logout();
             }
+            console.log('profile fetched');
         } catch (error) {
             this.logout();
             this.toastr.error(error.message);
@@ -143,28 +166,30 @@ export class AppService {
 
     async getRole() {
         try {
-            await sleep(500); // Assuming sleep is a function that pauses execution for a given time
+            console.log('getting role...');
+            // await sleep(500); // Assuming sleep is a function that pauses execution for a given time
             const userDocRef = doc(this.firestore, `users/${this.user.uid}`);
             const userDocSnap = await getDoc(userDocRef);
-    
+
             if (userDocSnap.exists()) {
-                console.log(userDocSnap);
+                console.log('userDocSnap :', userDocSnap);
                 const userData = userDocSnap.data();
                 this.role = userData.role;
+                console.log('role fetched');
             } else {
-                console.error('No such document!');
+                console.error('error on fetching role');
             }
         } catch (error) {
-            this.toastr.error(error.message);
+            this.toastr.error('error fetching role', error.message);
         }
     }
 
     async getPhoneNumber() {
         try {
-            await sleep(500); // Assuming sleep is a function that pauses execution for a given time
+            // await sleep(500); // Assuming sleep is a function that pauses execution for a given time
             const userDocRef = doc(this.firestore, `users/${this.user.uid}`);
             const userDocSnap = await getDoc(userDocRef);
-    
+
             if (userDocSnap.exists()) {
                 console.log(userDocSnap);
                 const userData = userDocSnap.data();
@@ -176,5 +201,17 @@ export class AppService {
         } catch (error) {
             this.toastr.error(error.message);
         }
+    }
+
+    fetchProfileDuringInit(): Promise<void> {
+        return new Promise<void>((resolve, reject) => {
+            this.getProfile()
+                .then(() => {
+                    resolve();
+                })
+                .catch((error) => {
+                    reject(error);
+                });
+        });
     }
 }

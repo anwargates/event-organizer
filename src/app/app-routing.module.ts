@@ -22,6 +22,7 @@ import {ProductsTableComponent} from '@pages/products-table/products-table.compo
 import {ProductsFormComponent} from '@pages/products-form/products-form.component';
 import {PaymentConfirmComponent} from '@pages/payment-confirm/payment-confirm.component';
 import {AdminGuard} from '@guards/admin.guard';
+import {profileResolverResolver} from './resolvers/profile-resolver.resolver';
 
 const routes: Routes = [
     {
@@ -53,6 +54,9 @@ const routes: Routes = [
         component: MainComponent,
         canActivate: [AuthGuard],
         canActivateChild: [AuthGuard],
+        // resolve: {
+        //     profile: profileResolverResolver
+        // },
         children: [
             {
                 path: 'profile',

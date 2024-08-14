@@ -11,68 +11,176 @@
 
 <div class="section properties">
     <div class="container">
-        <!-- <ul class="properties-filter">
-            <li>
-                <a class="is_active" href="#!" data-filter="*">Show All</a>
-            </li>
-            <li>
-                <a href="#!" data-filter=".adv">Event Organizer</a>
-            </li>
-            <li>
-                <a href="#!" data-filter=".str">Wedding Organizer</a>
-            </li>
-            <li>
-                <a href="#!" data-filter=".rac">Music Concert</a>
-            </li>
-        </ul> -->
-        <div class="row properties-box">
-            <div
-                *ngFor="let event of products"
-                class="col-lg-4 col-md-6 align-self-center mb-30 events-items"
-                [ngClass]="event.type"
-            >
-                <div class="item">
-                    <a [href]="event.detailsUrl"
-                        ><img [src]="event.imageUrl" alt=""
-                    /></a>
-                    <span class="category">{{ event.category }}</span>
-                    <h6>{{ event.price | currency: 'IDR' }}</h6>
-                    <h4>
-                        <a [href]="event.detailsUrl">{{ event.title }}</a>
-                    </h4>
-                    <ul>
-                        <li>
-                            Max Guests:
-                            <span>{{ event.details.maxGuests }}</span>
-                        </li>
-                        <li>
-                            Duration: <span>{{ event.details.duration }}</span>
-                        </li>
-                        <li>
-                            Location: <span>{{ event.details.location }}</span>
-                        </li>
-                        <li>
-                            Amenities:
-                            <span>{{
-                                event.details.amenities.join(', ')
-                            }}</span>
-                        </li>
-                    </ul>
-                    <div class="main-button">
-                        <a (click)="order(event)">Order</a>
+        <mat-accordion>
+            <!-- Event Organizer Accordion -->
+            <mat-expansion-panel>
+                <mat-expansion-panel-header>
+                    <mat-panel-title class="flex justify-content-between"
+                        >Wedding Organizer
+                        <h6>
+                            {{ weddingMinPrice | currency: 'IDR' }}
+                            -
+                            {{ weddingMaxPrice | currency: 'IDR' }}
+                        </h6></mat-panel-title
+                    >
+                </mat-expansion-panel-header>
+                <div class="row properties-box">
+                    <div
+                        *ngFor="let wedding of weddings"
+                        class="col-lg-4 col-md-6 align-self-center mb-30 events-items"
+                        [ngClass]="wedding.type"
+                    >
+                        <div class="item">
+                            <a [href]="wedding.detailsUrl">
+                                <img [src]="wedding.imageUrl" alt="" />
+                            </a>
+                            <span class="category">{{ wedding.category }}</span>
+                            <h6>{{ wedding.price | currency: 'IDR' }}</h6>
+                            <h4>
+                                <a [href]="wedding.detailsUrl">{{
+                                    wedding.title
+                                }}</a>
+                            </h4>
+                            <ul>
+                                <li>
+                                    Max Guests:
+                                    <span>{{ wedding.details.maxGuests }}</span>
+                                </li>
+                                <li>
+                                    Duration:
+                                    <span>{{ wedding.details.duration }} hrs</span>
+                                </li>
+                                <li>
+                                    Location:
+                                    <span>{{ wedding.details.location }}</span>
+                                </li>
+                                <li>
+                                    Amenities:
+                                    <span>{{
+                                        wedding.details.amenities.join(', ')
+                                    }}</span>
+                                </li>
+                            </ul>
+                            <div class="main-button">
+                                <a (click)="order(wedding)">Order</a>
+                            </div>
+                        </div>
                     </div>
                 </div>
-            </div>
-        </div>
-        <!-- <div class="row">
-            <div class="col-lg-12">
-                <ul class="pagination">
-                    <li><a href="#">1</a></li>
-                    <li><a class="is_active" href="#">2</a></li>
-                    <li><a href="#">3</a></li>
-                    <li><a href="#">>></a></li>
-                </ul>
-            </div>
-        </div> -->
+            </mat-expansion-panel>
+
+            <!-- Wedding Organizer Accordion -->
+            <mat-expansion-panel>
+                <mat-expansion-panel-header>
+                    <mat-panel-title class="flex justify-content-between"
+                        >Music Organizer
+                        <h6>
+                            {{ musicMinPrice | currency: 'IDR' }}
+                            -
+                            {{ musicMaxPrice | currency: 'IDR' }}
+                        </h6></mat-panel-title
+                    >
+                </mat-expansion-panel-header>
+                <div class="row properties-box">
+                    <div
+                        *ngFor="let music of musics"
+                        class="col-lg-4 col-md-6 align-self-center mb-30 events-items"
+                        [ngClass]="music.type"
+                    >
+                        <div class="item">
+                            <a [href]="music.detailsUrl">
+                                <img [src]="music.imageUrl" alt="" />
+                            </a>
+                            <span class="category">{{ music.category }}</span>
+                            <h6>{{ music.price | currency: 'IDR' }}</h6>
+                            <h4>
+                                <a [href]="music.detailsUrl">{{
+                                    music.title
+                                }}</a>
+                            </h4>
+                            <ul>
+                                <li>
+                                    Max Guests:
+                                    <span>{{ music.details.maxGuests }}</span>
+                                </li>
+                                <li>
+                                    Duration:
+                                    <span>{{ music.details.duration }} hrs</span>
+                                </li>
+                                <li>
+                                    Location:
+                                    <span>{{ music.details.location }}</span>
+                                </li>
+                                <li>
+                                    Amenities:
+                                    <span>{{
+                                        music.details.amenities.join(', ')
+                                    }}</span>
+                                </li>
+                            </ul>
+                            <div class="main-button">
+                                <a (click)="order(music)">Order</a>
+                            </div>
+                        </div>
+                    </div>
+                </div>
+            </mat-expansion-panel>
+
+            <!-- Music Concert Accordion -->
+            <mat-expansion-panel>
+                <mat-expansion-panel-header>
+                    <mat-panel-title class="flex justify-content-between">
+                        Meeting Event
+                        <h6>
+                            {{ meetingMinPrice | currency: 'IDR' }} -
+                            {{ meetingMaxPrice | currency: 'IDR' }}
+                        </h6>
+                    </mat-panel-title>
+                </mat-expansion-panel-header>
+                <div class="row properties-box">
+                    <div
+                        *ngFor="let meeting of meetings"
+                        class="col-lg-4 col-md-6 align-self-center mb-30 events-items"
+                        [ngClass]="meeting.type"
+                    >
+                        <div class="item">
+                            <a [href]="meeting.detailsUrl">
+                                <img [src]="meeting.imageUrl" alt="" />
+                            </a>
+                            <span class="category">{{ meeting.category }}</span>
+                            <h6>{{ meeting.price | currency: 'IDR' }}</h6>
+                            <h4>
+                                <a [href]="meeting.detailsUrl">{{
+                                    meeting.title
+                                }}</a>
+                            </h4>
+                            <ul>
+                                <li>
+                                    Max Guests:
+                                    <span>{{ meeting.details.maxGuests }}</span>
+                                </li>
+                                <li>
+                                    Duration:
+                                    <span>{{ meeting.details.duration }} hrs</span>
+                                </li>
+                                <li>
+                                    Location:
+                                    <span>{{ meeting.details.location }}</span>
+                                </li>
+                                <li>
+                                    Amenities:
+                                    <span>{{
+                                        meeting.details.amenities.join(', ')
+                                    }}</span>
+                                </li>
+                            </ul>
+                            <div class="main-button">
+                                <a (click)="order(meeting)">Order</a>
+                            </div>
+                        </div>
+                    </div>
+                </div>
+            </mat-expansion-panel>
+        </mat-accordion>
     </div>
 </div>

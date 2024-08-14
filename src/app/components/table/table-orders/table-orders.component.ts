@@ -135,7 +135,7 @@ export class TableOrdersComponent implements OnInit {
     }
 
     isNotPaid(order: Order): boolean {
-        return order.status === 'BELUM BAYAR';
+        return order.status === 'BELUM BAYAR' && this.appService.role == 'USER';
     }
 
     navigateToPayment(order: Order) {

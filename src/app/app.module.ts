@@ -90,7 +90,10 @@ import {ConfirmationModalComponent} from './components/modals/confirmation-modal
 import {DeleteConfirmationDialogComponent} from './components/modals/delete-confirmation-dialog/delete-confirmation-dialog.component';
 import {MatDialogModule} from '@angular/material/dialog';
 import {AngularFireModule} from '@angular/fire/compat';
-import { EditProductsDialogComponent } from './components/modals/edit-products-dialog/edit-products-dialog.component';
+import {EditProductsDialogComponent} from './components/modals/edit-products-dialog/edit-products-dialog.component';
+import {AddProductsDialogComponent} from './components/modals/add-products-dialog/add-products-dialog.component';
+import {MatExpansionModule} from '@angular/material/expansion';
+import {HomeFooterComponent} from '@modules/home/home-footer/home-footer.component';
 
 registerLocaleData(localeEn, 'en-EN');
 
@@ -132,6 +135,7 @@ registerLocaleData(localeEn, 'en-EN');
         HomeComponent,
         LandingComponent,
         HomeHeaderComponent,
+        HomeFooterComponent,
         ProductsComponent,
         CheckoutComponent,
         PaymentComponent,
@@ -143,7 +147,8 @@ registerLocaleData(localeEn, 'en-EN');
         ConfirmationFormComponent,
         ConfirmationModalComponent,
         DeleteConfirmationDialogComponent,
-        EditProductsDialogComponent
+        EditProductsDialogComponent,
+        AddProductsDialogComponent
     ],
     bootstrap: [AppComponent],
     imports: [
@@ -176,7 +181,8 @@ registerLocaleData(localeEn, 'en-EN');
         StorageModule,
         NgbModule,
         MatDialogModule,
-        AngularFireModule.initializeApp(environment.FIREBASE_CONFIG)
+        AngularFireModule.initializeApp(environment.FIREBASE_CONFIG),
+        MatExpansionModule
     ],
     providers: [
         provideHttpClient(withInterceptorsFromDi()),

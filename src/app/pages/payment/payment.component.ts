@@ -20,7 +20,7 @@ export class PaymentComponent implements OnInit {
     paymentForm: FormGroup;
     order: any;
     isReady: boolean = false;
-    qrCodeUrl: string = 'assets/images/qr-code.png'; // Replace with actual QR code URL
+    qrCodeUrl: string = 'https://firebasestorage.googleapis.com/v0/b/event-organizer-2784f.appspot.com/o/Cara-Membuat-QRIS-BRI.png?alt=media&token=edb2604b-14a1-4b7a-ac27-33d8ca83b767'; // Replace with actual QR code URL
     accountNumber: string = '123456789';
     private storage = inject(Storage);
 
