@@ -1,5 +1,5 @@
 import {Injectable} from '@angular/core';
-import {Observable} from 'rxjs';
+import {map, Observable} from 'rxjs';
 // import {addDoc, collection, deleteDoc, doc, Firestore, updateDoc} from 'firebase/firestore';
 import {
     Firestore,
@@ -13,6 +13,7 @@ import {
     query,
     where
 } from '@angular/fire/firestore';
+import {Order} from '@/models/orders';
 
 @Injectable({
     providedIn: 'root'
@@ -51,5 +52,17 @@ export class OrdersService {
     deleteOrder(orderId: string) {
         const orderDocRef = doc(this.firestore, `orders/${orderId}`);
         return deleteDoc(orderDocRef);
+    }
+
+    countOrderByParameter(
+        parameter: keyof Order,
+        value: any
+    ): Observable<number> {
+        return this.getOrders().pipe(
+            map(
+                (orders) =>
+                    orders.filter((order) => order[parameter] === value).length
+            )
+        );
     }
 }

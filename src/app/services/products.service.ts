@@ -58,4 +58,17 @@ export class ProductsService {
         const orderDocRef = doc(this.firestore, `products/${productId}`);
         return deleteDoc(orderDocRef);
     }
+
+    countProductsByParameter(
+        parameter: keyof Products,
+        value: any
+    ): Observable<number> {
+        return this.getProducts().pipe(
+            map(
+                (products) =>
+                    products.filter((product) => product[parameter] === value)
+                        .length
+            )
+        );
+    }
 }

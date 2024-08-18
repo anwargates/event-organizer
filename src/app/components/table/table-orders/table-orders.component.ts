@@ -104,6 +104,7 @@ export class TableOrdersComponent implements OnInit {
         const dialogRef = this.dialog.open(DeleteConfirmationDialogComponent);
 
         dialogRef.afterClosed().subscribe((result) => {
+            console.log('dialog result: ', result);
             if (result) {
                 this.ordersService
                     .deleteOrder(orderId)

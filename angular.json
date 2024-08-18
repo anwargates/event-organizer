@@ -36,15 +36,13 @@
                             "node_modules/ngx-toastr/toastr.css",
                             "src/scss/animate.css",
                             "src/scss/fontawesome.css",
-                            "src/scss/owl.css",
                             "src/scss/templatemo-villa-agency.css"
                         ],
                         "scripts": [
                             "src/assets/js/isotope.min.js",
                             "node_modules/jquery/dist/jquery.min.js",
                             "src/assets/js/counter.js",
-                            "src/assets/js/custom.js",
-                            "src/assets/js/owl-carousel.js"
+                            "src/assets/js/custom.js"
                         ]
                     },
                     "configurations": {

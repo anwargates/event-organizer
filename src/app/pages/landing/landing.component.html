@@ -677,18 +677,26 @@
                 </div>
             </div>
             <div class="col-lg-5">
-                <form id="contact-form" action="" method="post">
+                <form
+                    id="contact-form"
+                    action=""
+                    method="post"
+                    [formGroup]="contactForm"
+                    (ngSubmit)="onSubmit()"
+                >
                     <div class="row">
                         <div class="col-lg-12">
                             <fieldset>
                                 <label for="name">Full Name</label>
                                 <input
+                                    matInput
                                     type="name"
                                     name="name"
                                     id="name"
                                     placeholder="Your Name..."
                                     autocomplete="on"
                                     required
+                                    formControlName="name"
                                 />
                             </fieldset>
                         </div>
@@ -696,12 +704,14 @@
                             <fieldset>
                                 <label for="email">Email Address</label>
                                 <input
+                                    matInput
                                     type="text"
                                     name="email"
                                     id="email"
                                     pattern="[^ @]*@[^ @]*"
                                     placeholder="Your E-mail..."
                                     required=""
+                                    formControlName="email"
                                 />
                             </fieldset>
                         </div>
@@ -709,11 +719,13 @@
                             <fieldset>
                                 <label for="subject">Subject</label>
                                 <input
+                                    matInput
                                     type="subject"
                                     name="subject"
                                     id="subject"
                                     placeholder="Subject..."
                                     autocomplete="on"
+                                    formControlName="subject"
                                 />
                             </fieldset>
                         </div>
@@ -721,9 +733,11 @@
                             <fieldset>
                                 <label for="message">Message</label>
                                 <textarea
+                                    matInput
                                     name="message"
                                     id="message"
                                     placeholder="Your Message"
+                                    formControlName="message"
                                 ></textarea>
                             </fieldset>
                         </div>
@@ -733,6 +747,7 @@
                                     type="submit"
                                     id="form-submit"
                                     class="orange-button"
+                                    [disabled]="contactForm.invalid"
                                 >
                                     Send Message
                                 </button>

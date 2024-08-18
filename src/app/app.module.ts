@@ -94,6 +94,7 @@ import {EditProductsDialogComponent} from './components/modals/edit-products-dia
 import {AddProductsDialogComponent} from './components/modals/add-products-dialog/add-products-dialog.component';
 import {MatExpansionModule} from '@angular/material/expansion';
 import {HomeFooterComponent} from '@modules/home/home-footer/home-footer.component';
+import { MatSnackBarModule } from '@angular/material/snack-bar';
 
 registerLocaleData(localeEn, 'en-EN');
 
@@ -182,7 +183,8 @@ registerLocaleData(localeEn, 'en-EN');
         NgbModule,
         MatDialogModule,
         AngularFireModule.initializeApp(environment.FIREBASE_CONFIG),
-        MatExpansionModule
+        MatExpansionModule,
+        MatSnackBarModule
     ],
     providers: [
         provideHttpClient(withInterceptorsFromDi()),
