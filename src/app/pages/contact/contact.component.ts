@@ -1,57 +1,14 @@
 import {HttpClient} from '@angular/common/http';
-import {AfterViewInit, Component} from '@angular/core';
-import {FormBuilder, FormGroup, Validators} from '@angular/forms';
-import {OwlOptions} from 'ngx-owl-carousel-o';
+import {Component} from '@angular/core';
+import {FormGroup, FormBuilder, Validators} from '@angular/forms';
 import {MatSnackBar} from '@angular/material/snack-bar';
-import {$} from 'protractor';
 
 @Component({
-    selector: 'app-landing',
-    templateUrl: './landing.component.html',
-    styleUrl: './landing.component.scss'
+    selector: 'app-contact',
+    templateUrl: './contact.component.html',
+    styleUrl: './contact.component.scss'
 })
-export class LandingComponent implements AfterViewInit {
-    customOptions: OwlOptions = {
-        loop: true,
-        items: 1, // Try starting with a fixed number of items
-        mouseDrag: false,
-        touchDrag: false,
-        pullDrag: false,
-        dots: false,
-        navSpeed: 700,
-        navText: ['', ''],
-        nav: true
-    };
-    activeTab: string = 'appartment';
-
-    setActiveTab(tabName: string) {
-        this.activeTab = tabName;
-        console.log(this.activeTab);
-    }
-
-    isActiveTab(tabName: string): boolean {
-        return this.activeTab === tabName;
-    }
-
-    ngAfterViewInit(): void {
-        // this.initializeOwlCarousel();
-        // $('.owl-carousel').owlCarousel();
-        console.log(this.activeTab);
-    }
-
-    // initializeOwlCarousel(): void {
-    //     ($('.owl-carousel') as any).owlCarousel({
-    //         loop: true,
-    //         margin: 10,
-    //         nav: true,
-    //         responsive: {
-    //             0: {items: 1},
-    //             600: {items: 1},
-    //             1000: {items: 1}
-    //         }
-    //     });
-    // }
-
+export class ContactComponent {
     contactForm: FormGroup;
 
     constructor(
@@ -66,8 +23,9 @@ export class LandingComponent implements AfterViewInit {
             message: ['', Validators.required]
         });
     }
-
     onSubmit() {
+        console.log('onSubmitClicked');
+
         if (this.contactForm.valid) {
             const formData = this.contactForm.value;
 

@@ -23,6 +23,7 @@ import {ProductsFormComponent} from '@pages/products-form/products-form.componen
 import {PaymentConfirmComponent} from '@pages/payment-confirm/payment-confirm.component';
 import {AdminGuard} from '@guards/admin.guard';
 import {profileResolverResolver} from './resolvers/profile-resolver.resolver';
+import { ContactComponent } from '@pages/contact/contact.component';
 
 const routes: Routes = [
     {
@@ -32,6 +33,10 @@ const routes: Routes = [
             {
                 path: '',
                 component: LandingComponent
+            },
+            {
+                path: 'contact',
+                component: ContactComponent
             },
             {
                 path: 'products',

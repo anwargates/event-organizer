@@ -3,20 +3,28 @@
     <div class="container">
         <h1>Silakan Transfer ke Rekening Berikut</h1>
         <div *ngIf="order">
-            <img [src]="qrCodeUrl" alt="QR Code" />
-            <p>Nomor Rekening: {{ accountNumber }}</p>
-            <form [formGroup]="paymentForm" (ngSubmit)="onSubmit()">
-                <input
-                    type="file"
-                    (change)="handleFile($event)"
-                />
-                <button
-                    type="submit"
-                    [disabled]="paymentForm.invalid || !isReady"
-                >
-                    Submit Proof of Payment
-                </button>
-            </form>
+            <div
+                class="d-flex flex-column justify-content-center align-items-center"
+            >
+                <img class="qr-logo" [src]="qrLogo" alt="QR Code" />
+                <div class="d-flex bank-list">
+                    <img [src]="mandiriLogo" alt="Mandiri" />
+                    <img [src]="briLogo" alt="BRI" />
+                    <img [src]="bcaLogo" alt="BCA" />
+                </div>
+            </div>
+            <div class="form-submit d-flex flex-column justify-content-center align-items-center">
+                <p class="text-center" class="">Nomor Rekening: {{ accountNumber }}</p>
+                <form class="form-submit d-flex justify-content-center align-items-center" [formGroup]="paymentForm" (ngSubmit)="onSubmit()">
+                    <input type="file" (change)="handleFile($event)" />
+                    <button
+                        type="submit"
+                        [disabled]="paymentForm.invalid || !isReady"
+                    >
+                        Submit Proof of Payment
+                    </button>
+                </form>
+            </div>
         </div>
     </div>
 </div>

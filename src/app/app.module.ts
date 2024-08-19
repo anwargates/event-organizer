@@ -95,6 +95,7 @@ import {AddProductsDialogComponent} from './components/modals/add-products-dialo
 import {MatExpansionModule} from '@angular/material/expansion';
 import {HomeFooterComponent} from '@modules/home/home-footer/home-footer.component';
 import { MatSnackBarModule } from '@angular/material/snack-bar';
+import { ContactComponent } from './pages/contact/contact.component';
 
 registerLocaleData(localeEn, 'en-EN');
 
@@ -149,7 +150,8 @@ registerLocaleData(localeEn, 'en-EN');
         ConfirmationModalComponent,
         DeleteConfirmationDialogComponent,
         EditProductsDialogComponent,
-        AddProductsDialogComponent
+        AddProductsDialogComponent,
+        ContactComponent
     ],
     bootstrap: [AppComponent],
     imports: [

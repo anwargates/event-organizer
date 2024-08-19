@@ -20,7 +20,14 @@ export class PaymentComponent implements OnInit {
     paymentForm: FormGroup;
     order: any;
     isReady: boolean = false;
-    qrCodeUrl: string = 'https://firebasestorage.googleapis.com/v0/b/event-organizer-2784f.appspot.com/o/Cara-Membuat-QRIS-BRI.png?alt=media&token=edb2604b-14a1-4b7a-ac27-33d8ca83b767'; // Replace with actual QR code URL
+    qrLogo: string =
+        'https://firebasestorage.googleapis.com/v0/b/event-organizer-2784f.appspot.com/o/QR.png?alt=media&token=9caab017-22e4-4ebb-8242-e490dfa5e897';
+    briLogo: string =
+        'https://firebasestorage.googleapis.com/v0/b/event-organizer-2784f.appspot.com/o/BRI.png?alt=media&token=7a9e2009-c83f-40bc-a542-1a6d1dee459c';
+    mandiriLogo: string =
+        'https://firebasestorage.googleapis.com/v0/b/event-organizer-2784f.appspot.com/o/Mandiri.png?alt=media&token=3bb6441c-5013-433e-8765-1157a10480f6';
+    bcaLogo: string =
+        'https://firebasestorage.googleapis.com/v0/b/event-organizer-2784f.appspot.com/o/BCA.png?alt=media&token=cab9ab56-4b6e-4c57-8c4b-25bda67a5a7e';
     accountNumber: string = '123456789';
     private storage = inject(Storage);
 
