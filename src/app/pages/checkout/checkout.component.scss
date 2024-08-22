@@ -20,3 +20,12 @@ button {
     font-weight: 700;
     font-size: x-large;
 }
+
+ul,
+li {
+    padding-inline-start: 40px !important;
+    margin-bottom: 16px !important;
+    list-style: disc !important;
+    // border: 0 !important;
+    // outline: 0 !important;
+}

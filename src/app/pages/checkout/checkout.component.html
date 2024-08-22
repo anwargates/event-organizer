@@ -12,22 +12,27 @@
             </div>
             <div class="card-body">
                 <h3 class="card-subtitle mb-2">{{ product.title }}</h3>
-                <p class="text-muted">Category: {{ product.category }}</p>
+                <p class="text-muted">Kategori: {{ product.category }}</p>
                 <p class="text-muted">
-                    Price: {{ product.price | currency: 'IDR' }}
+                    Harga: {{ product.price | currency: 'IDR' }}
                 </p>
                 <ul class="list-group mb-4">
                     <li class="list-group-item">
-                        Max Guests: {{ product.details.maxGuests }}
+                        Max Tamu: {{ product.details.maxGuests }} Pax
                     </li>
                     <li class="list-group-item">
-                        Duration: {{ product.details.duration }}
+                        Durasi: {{ product.details.duration }} Jam
                     </li>
                     <li class="list-group-item">
-                        Location: {{ product.details.location }}
+                        Lokasi: {{ product.details.location }}
                     </li>
                     <li class="list-group-item">
-                        Amenities: {{ product.details.amenities.join(', ') }}
+                        Kelengkapan: {{ product.details.amenities.join(', ') }}
+                    </li>
+                    <!-- Rich Text Details -->
+                    <li class="list-group-item" *ngIf="product.details.info">
+                        <h4>Paket:</h4>
+                        <div [innerHTML]="product.details.info"></div>
                     </li>
                 </ul>
                 <form
@@ -36,7 +41,7 @@
                 >
                     <div class="mb-3">
                         <mat-form-field appearance="fill" class="w-100">
-                            <mat-label>Event Date Range</mat-label>
+                            <mat-label>Pilih Tanggal Event</mat-label>
                             <mat-date-range-input
                                 [formGroup]="checkoutForm"
                                 [rangePicker]="eventDateRangePicker"

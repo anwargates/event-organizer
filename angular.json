@@ -36,7 +36,8 @@
                             "node_modules/ngx-toastr/toastr.css",
                             "src/scss/animate.css",
                             "src/scss/fontawesome.css",
-                            "src/scss/templatemo-villa-agency.css"
+                            "src/scss/templatemo-villa-agency.css",
+                            "node_modules/quill/dist/quill.snow.css"
                         ],
                         "scripts": [
                             "src/assets/js/isotope.min.js",

@@ -48,6 +48,8 @@ $adminlte-theme: mat.define-theme((
 
 @import './scss/adminlte.scss';
 
+// @import '~quill/dist/quill.snow.css';
+
 body {
     width: 100vw;
     height: 100vh;

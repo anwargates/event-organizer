@@ -59,7 +59,8 @@ export class AddProductsDialogComponent {
             maxGuests: ['', Validators.required],
             amenities: ['', Validators.required],
             price: ['', Validators.required],
-            category: ['', Validators.required]
+            category: ['', Validators.required],
+            info: ['']
         });
     }
 
@@ -86,6 +87,7 @@ export class AddProductsDialogComponent {
             const preparedProduct: Products = {
                 title: this.productForm.value.title,
                 details: {
+                    info: this.productForm.value.info,
                     location: this.productForm.value.location,
                     duration: this.productForm.value.duration,
                     maxGuests: this.productForm.value.maxGuests,

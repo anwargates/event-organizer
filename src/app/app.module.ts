@@ -96,6 +96,7 @@ import {MatExpansionModule} from '@angular/material/expansion';
 import {HomeFooterComponent} from '@modules/home/home-footer/home-footer.component';
 import { MatSnackBarModule } from '@angular/material/snack-bar';
 import { ContactComponent } from './pages/contact/contact.component';
+import { QuillModule } from 'ngx-quill';
 
 registerLocaleData(localeEn, 'en-EN');
 
@@ -186,7 +187,8 @@ registerLocaleData(localeEn, 'en-EN');
         MatDialogModule,
         AngularFireModule.initializeApp(environment.FIREBASE_CONFIG),
         MatExpansionModule,
-        MatSnackBarModule
+        MatSnackBarModule,
+        QuillModule.forRoot(),
     ],
     providers: [
         provideHttpClient(withInterceptorsFromDi()),

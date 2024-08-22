@@ -4,6 +4,7 @@ export interface Products {
         location: string;
         amenities: string[];
         maxGuests: number;
+        info: string;
     };
     title: string;
     detailsUrl: string;

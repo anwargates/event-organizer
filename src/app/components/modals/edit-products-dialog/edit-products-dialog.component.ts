@@ -34,7 +34,8 @@ export class EditProductsDialogComponent {
             duration: [data.details.duration, Validators.required],
             maxGuests: [data.details.maxGuests, Validators.required],
             amenities: [data.details.amenities.join(', '), Validators.required],
-            price: [data.price, Validators.required]
+            price: [data.price, Validators.required],
+            info: [data.details.info, Validators.required]
         });
     }
 
@@ -49,6 +50,7 @@ export class EditProductsDialogComponent {
                 title: this.productForm.value.title,
                 details: {
                     ...this.data.details,
+                    info: this.productForm.value.info,
                     location: this.productForm.value.location,
                     duration: this.productForm.value.duration,
                     maxGuests: this.productForm.value.maxGuests,
